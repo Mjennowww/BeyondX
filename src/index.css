@@ -1,17 +1,51 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;800;900&family=Poppins:wght@400;600;700&display=swap");
 
-* {
+/*////////////////////////
+    Table of Contents
+    1. Global Styles
+    2. Typography
+    3. Layout
+        3.1 Reusables
+        3.2 Other
+    4. Areas
+        4.1 Header
+        4.2 Introduction
+        etc.
+    5. Media Queries
+////////////////////////*/
+
+
+/* ------------------------------- 1. Global Styles -------------------------------- */
+
+*, *::before, *::after {
   box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding:0;
+}
+
+html, body {
+  height: 100%;
 }
 
 
 body {
+  height:100%;
+  background: rgb(0,0,0);
+  background:  linear-gradient( 99.9deg, rgba(27,24,31,1) 21.2%, rgba(50,4,89,1) 84.8% );
   margin: 0;
   font-family: 'Poppins', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #000000;
+  color: #fefefe;
 }
+
+
+
+/* ------------------------------- 2. Typography ----------------------------------- */
+
 
 h1,
 h2,
@@ -22,6 +56,7 @@ h6 {
   font-family: 'Orbitron', 'Times New Roman', cursive;
 }
 
+h1 { font-size:7em; line-height:120%; }
 
 
 /*STIJLING*/
@@ -34,5 +69,102 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
+.outer-content-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.inner-content-container {
+  flex-basis: 1400px;
+  flex-shrink: 1;
+  flex-grow: 0;
+ margin: 0 20px;
+ display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*Header */
+
+.inner-content-container-header {
+  flex-basis: 1400px;
+  flex-shrink: 1;
+  flex-grow: 0;
+  margin: 0 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+#header {
+   color: white;
+  padding: 10px 0;
+  position: absolute;
+  flex-wrap:wrap;
+}
+
+
+.logo-container {
+  display: flex;
+  align-items: flex-start;
+  width: 250px;
+}
+
+
+.header-navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+   width: 100%;
+}
+
+.header-navigation ul {
+  flex-basis: 500px;
+  flex-shrink: 1;
+  flex-grow: 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header-navigation a {
+  color: white;
+  text-decoration:none;
+}
+
+
+
+
+
+
+nav a { color:white; text-decoration:none; }
+
+
+nav a,
+nav a:visited,
+nav a:active {
+  color: white;
+}
+
+
+
+
+#home {
+  background-image: url("./assets/wallpapersden.com_on-mars-landscape_3840x2160.jpg");
+  height: 100vh;
+  padding-top:20%;
+  background-size:cover;
+  background-position:center bottom;
+  display:flex;
+  align-items:flex-top;
+  justify-content:center;
+}
+
 
 
