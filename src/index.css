@@ -166,5 +166,14 @@ nav a:active {
   justify-content:center;
 }
 
+.headquarters {
+  writing-mode: vertical-rl;text-orientation: mixed;
+  display:flex;
+  position:absolute;
+  right: 0;
+  padding:10px;
+  align-items:center;
+  justify-content:flex-end;
 
+}
 
