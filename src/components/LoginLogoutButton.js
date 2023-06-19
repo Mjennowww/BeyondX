@@ -1,13 +1,12 @@
 import React from "react";
 
-function LoginLogoutButton({onClick, text}) {
+function LoginLogoutButton({ className, onClick, text }) {
     return (
         <button
-            className="button__reusable login-logout-button"
+            className={className}
             type="button"
             onClick={onClick}
         >
-
             {text}
         </button>
     );

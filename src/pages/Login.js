@@ -33,11 +33,12 @@ function Login() {
         <div >
 
             <main >
+
                 <Authorization
                     onSubmitValue={handleSubmit(makeLoginRequest)}
                     header="Login"
-                    underlineTextPart1="New to My Color Palette?"
-                    underlineLink="/register"
+                    underlineTextPart1="New to BeyondX?"
+                    underlineLink="/signup"
                     underlineLinkText="Register here"
                     underlineTextPart2="your new account"
                     buttonText="login"
@@ -45,7 +46,7 @@ function Login() {
                     loading={loading && <span>Logging in to your account, please wait...</span>}
                 >
                     <label  htmlFor="username">
-                        Username
+                        Username<br />
                         <input
 
                             type="text"
@@ -57,8 +58,9 @@ function Login() {
                         />
                         {errors.username && <p className="authorization__error">{errors.username.message}</p>}
                     </label>
+                    <br />
                     <label  htmlFor="password">
-                        Password
+                        Password<br />
                         <input
 
                             type="password"

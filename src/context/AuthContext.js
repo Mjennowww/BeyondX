@@ -15,7 +15,7 @@ function AuthContextProvider({ children }) {
         status: "pending",
     });
 
-    const history = useNavigate();
+    const navigate = useNavigate();
 
     // Functie om te controleren of er een token in de lokale opslag aanwezig is en of deze verlopen is of niet
     useEffect(() => {
@@ -25,35 +25,6 @@ function AuthContextProvider({ children }) {
             const decodedToken = jwt_decode(token);
 
             if (decodedToken.exp > new Date() / 1000) {
-                // Functie om gebruikersgegevens op te halen wanneer de token niet is verlopen
-                async function getUserData() {
-                    try {
-                        const response = await axios.get(`${endpoint}api/user`, {
-                            headers: {
-                                "Content-Type": "application/json",
-                                Authorization: `Bearer ${token}`,
-                            },
-                        });
-
-                        toggleAuth({
-                            isAuth: true,
-                            user: {
-                                email: response.data.email,
-                                username: response.data.username,
-                                id: response.data.id,
-                            },
-                            status: "done",
-                        });
-                    } catch (e) {
-                        toggleAuth({
-                            ...auth,
-                            status: "error",
-                        });
-                        console.error(e);
-                        localStorage.clear();
-                    }
-                }
-
                 getUserData();
             } else {
                 toggleAuth({
@@ -69,6 +40,39 @@ function AuthContextProvider({ children }) {
         }
     }, []);
 
+    // Functie om gebruikersgegevens op te halen
+    async function getUserData() {
+        try {
+            const token = localStorage.getItem("token");
+            const response = await axios.get(`${endpoint}api/user`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            toggleAuth({
+                ...auth,
+                isAuth: true,
+                user: {
+                    email: response.data.email,
+                    username: response.data.username,
+                    id: response.data.id,
+                },
+                status: "done",
+            });
+        } catch (e) {
+            toggleAuth({
+                ...auth,
+                isAuth: false,
+                user: null,
+                status: "error",
+            });
+            console.error(e);
+            localStorage.clear();
+        }
+    }
+
     // Functie om in te loggen op My Color Palette
     function login(token) {
         const decodedToken = jwt_decode(token);
@@ -83,17 +87,22 @@ function AuthContextProvider({ children }) {
             status: "done",
         });
 
-        history("/");
+        // Haal de gebruikersgegevens op na het inloggen
+        getUserData();
+
+        navigate("/");
     }
 
-    // Functie om uit te loggen van My Color Palette
+    // Functie om uit te loggen
     function logout() {
+        localStorage.removeItem( 'token' )
         toggleAuth({
+            ...auth,
             isAuth: false,
             user: null,
             status: "done",
         });
-        history("/");
+        navigate("/");
     }
 
     const data = {

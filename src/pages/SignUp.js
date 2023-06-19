@@ -17,7 +17,7 @@ function Signup() {
 
     function submitRegister(data) {
         makeRegisterRequest(data)
-        navigate("/");
+        navigate("/login");
     }
 
     //Function for registering an account on the Novi educational backend
@@ -40,11 +40,11 @@ function Signup() {
 
     return (
         <div >
-            <main className="inner-container__reusable">
+            <main>
                 <Authorization
                     onSubmitValue={handleSubmit(submitRegister)}
                     header="Register"
-                    underlineTextPart1="Do you already have a My Color Palette account? "
+                    underlineTextPart1="Do you already have a account at BeyondX? "
                     underlineLink="/login"
                     underlineLinkText="Login here"
                     buttonText="Register"
