@@ -4,12 +4,9 @@ import LoginLogoutButton from "../components/LoginLogoutButton";
 import {Link, useNavigate} from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import {useContext} from "react";
-import logo from "../assets/logo.png";
-import mars from "../assets/image-mars.png"
-import titan from "../assets/image-titan.png"
 import moon from "../assets/image-moon.png"
 
-function Home() {
+function Moon() {
     const [nextLaunch, setNextLaunch] = useState(null);
     const [countdown, setCountdown] = useState(null);
     const navigate = useNavigate();
@@ -89,10 +86,9 @@ function Home() {
 
     return (
         <>
-            <section id="home" className="outer-content-container">
-                    {isAuth ? (
+            <section id="stars" className="outer-content-container">
+
                         <div className="inner-content-container">
-                            <h1 style={{ textAlign: 'center', fontSize:'6em'}}>EXPLORE OUR<br />NEW HOME</h1>
 
                             <article className="headquarters">
                                 <span style={{ textTransform:'uppercase' }}>Next Launch:</span>&nbsp;&nbsp;
@@ -102,7 +98,7 @@ function Home() {
 
                             <div className="home-article-container">
 
-                                <div className="cardmoon subreddit-article">
+                                <div className="card subreddit-article">
                                     <div className="card-header">
                                         <img className="profile-img" src={moon} alt="logo"  />
                                     </div>
@@ -113,50 +109,14 @@ function Home() {
 
                                 </div>
 
-                            <div className="cardmoon  subreddit-article">
-                                <div className="card-header">
-                                    <img className="profile-img" src={mars} alt="logo"  />
-                                </div>
-
-                                <p className="cardtitle" style={{ color: '#fefefe', fontSize: '60px', textTransform:'uppercase' }}>Mars</p>
-                                <p style={{ color: '#fefefe' }}>Details ->
-                                </p>
-
-                        </div>
-                                <div className="cardmoon subreddit-article">
-                                    <div className="card-header">
-                                        <img className="profile-img" src={titan} alt="logo"  />
-                                    </div>
-
-                                    <p className="cardtitle" style={{  color: '#fefefe', fontSize: '60px', textTransform:'uppercase' }}>Titan</p>
-
-                                    <p style={{ color: '#fefefe' }}>Details -></p>
 
 
-                                </div>
 
                         </div>
                         </div>
 
 
-                    ) : (
-                        <div className="inner-content-container">
-                        <h1 style={{ textAlign: 'center' }}>EXPLORE OUR<br />NEW HOME</h1>
 
-                        <article className="headquarters">
-                        <span style={{ textTransform:'uppercase' }}>Next Launch:</span>&nbsp;&nbsp;
-                        <div>{formatCountdown()}</div>
-                        </article>
-
-                            <LoginLogoutButton
-                                className="button button1"
-                                text="Get started"
-                                onClick={() => navigate("/login")}
-                            />
-
-
-                        </div>
-                    )}
 
 
             </section>
@@ -164,4 +124,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default Moon;

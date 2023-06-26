@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
+import React from "react";
 
 export default function SingleLaunch() {
     const [singleLaunch, setSingleLaunch] = useState(null);
@@ -32,12 +33,16 @@ export default function SingleLaunch() {
 
     return (
         <>
-            <section className="py-32 max-width grid grid-cols-1 gap-10 md:grid-cols-2">
-                <article>
+            <section id="launches" className="outer-content-container">
+                <div className="inner-content-container">
+
+                <article className="singleLaunch">
                     {singleLaunch && singleLaunch.links && singleLaunch.links.patch && singleLaunch.links.patch.large ? (
                         <img
                             src={singleLaunch.links.patch.large}
                             alt={singleLaunch.name}
+                            width="20%"
+                            margin="0 0 auto"
                         />
                     ) : (
                         <img
@@ -45,33 +50,30 @@ export default function SingleLaunch() {
                             alt=""
                         />
                     )}
-                </article>
-
-                <article>
-                    <h1 className="heading">{singleLaunch && singleLaunch.name}</h1>
-                    <h2 className="text-white font-bold text-xl opacity-75 mt-2">
+                    <h1 >{singleLaunch && singleLaunch.name}</h1>
+                    <h2>
                         Launch Date:{" "}
                         {singleLaunch && singleLaunch.success ? (
-                            <span className="text-emerald-500">Successful</span>
+                            <span>Successful</span>
                         ) : (
-                            <span className="text-rose-500">Failed</span>
+                            <span >Failed</span>
                         )}
                     </h2>
 
-                    <p className="text-white opacity-75 my-10">
+                    <p>
                         {singleLaunch && singleLaunch.details}
                     </p>
 
 
 
-                    <ul className="flex flex-wrap items-center justify-start gap-8">
+                    <ul className="singleLaunchDetails">
                         <li>
 
                             <a
                                 href={singleLaunch && singleLaunch.links.article}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="btn"
+                                className="button button2"
                             >
                                 Read Article
                             </a>
@@ -81,7 +83,7 @@ export default function SingleLaunch() {
                                 href={singleLaunch && singleLaunch.links.presskit}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="btn"
+                                className="button button3"
                             >
                                 Presskit
                             </a>
@@ -91,7 +93,7 @@ export default function SingleLaunch() {
                                 href={singleLaunch && singleLaunch.links.webcast}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="btn"
+                                className="button button1"
                             >
                                 Watch Launch on YouTube
                             </a>
@@ -99,13 +101,14 @@ export default function SingleLaunch() {
                         <li>
                             <Link
                                 to="/launches"
-                                className="text-white opacity-75 text-sm hover:opacity-100"
+
                             >
                                 &larr; Back
                             </Link>
                         </li>
                     </ul>
                 </article>
+                </div>
             </section>
 
             {loading && <p>Loading...</p>}

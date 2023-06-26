@@ -9,6 +9,7 @@ import Capsules from "./pages/Capsules";
 import Launches from "./pages/Launches";
 import SingleLaunch from "./pages/SingleLaunch";
 import Rockets from "./pages/Rockets";
+import Moon from "./pages/Moon.js";
 
 
 
@@ -19,6 +20,7 @@ function App() {
 
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/moon" element={<Moon />} />
                 <Route path="/capsules" element={<Capsules />} />
                 <Route path="/launches" element={<Launches />} />
                 <Route path="/launches/:id" element={<SingleLaunch/>} />
