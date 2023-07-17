@@ -53,7 +53,7 @@ function Signup() {
                 >
 
                     <label  htmlFor="email">
-                        E-mail
+                        <span style={{fontSize:'14px'}}>E-MAIL</span>
                         <input
 
                             type="email"
@@ -70,7 +70,7 @@ function Signup() {
                         {errors.email && <p >{errors.email.message}</p>}
                     </label>
                     <label  htmlFor="username">
-                        Username
+                        <span style={{fontSize:'14px'}}>USERNAME</span>
                         <input
 
                             type="text"
@@ -87,7 +87,7 @@ function Signup() {
                         {errors.username && <p className="authorization__error">{errors.username.message}</p>}
                     </label>
                     <label htmlFor="password">
-                        Password
+                        <span style={{fontSize:'14px'}}>PASSWORD</span>
                         <input
 
                             type="password"
@@ -101,7 +101,7 @@ function Signup() {
                                 }
                             })}
                         />
-                        {errors.password && <p>{errors.password.message}</p>}
+                        {errors.password && <p className="authorization__error">{errors.password.message}</p>}
                     </label>
                 </Authorization>
             </main>

@@ -44,9 +44,9 @@ export default function Launches() {
             <section id="launches" className="outer-content-container">
                 <div className="inner-content-container">
                 <h1>Launches</h1>
-                    <div className="subreddit-article-container">
+                    <div className="article-container">
                     {visibleLaunches.map(({ id, name, links, details }) => (
-                        <div className="card subreddit-article">
+                        <div className="card article">
 
                         <Link to={`/launches/${id}`} style={{textDecoration:'none'}} key={id}>
                             <img src={logo} alt="logo" width="100" />
@@ -55,8 +55,8 @@ export default function Launches() {
                             ) : (
                                 <img src="https://images2.imgbox.com/40/e3/GypSkayF_o.png" alt="" />
                             )}
-                            <h2 style={{ color: '#fefefe', fontSize: '32px',textDecoration:'none', textTransform:'uppercase' }}>{name}</h2>
-                            <p style={{ color: '#fefefe' }}>
+                            <h2 style={{ color: '#fefefe', fontWeight:'500', fontSize: '32px',textDecoration:'none', textAlign:'center', padding:'24px' , textTransform:'uppercase' }}>{name}</h2>
+                            <p style={{ color: '#fefefe', textAlign:'center'  }}>
                                 {details && details.length > 30 ? `${details.substring(0, 30)}...` : details}
                             </p>
                         </Link>
@@ -66,7 +66,7 @@ export default function Launches() {
                 </div>
                 <div>
                     <button
-                        className="button2 button"
+                        className="button3 button"
                         onClick={handleClickPrevious}
                         disabled={page === 1}
                     >

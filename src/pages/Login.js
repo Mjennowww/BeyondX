@@ -37,16 +37,16 @@ function Login() {
                 <Authorization
                     onSubmitValue={handleSubmit(makeLoginRequest)}
                     header="Login"
-                    underlineTextPart1="New to BeyondX?"
+                    underlineTextPart1="New to Beyond?"
                     underlineLink="/signup"
                     underlineLinkText="Register here"
-                    underlineTextPart2="your new account"
+                    underlineTextPart2="your account"
                     buttonText="login"
                     error={error && <span>Username/password invalid, try again or register a new account</span>}
                     loading={loading && <span>Logging in to your account, please wait...</span>}
                 >
                     <label  htmlFor="username">
-                        Username<br />
+                        <span style={{fontSize:'14px'}}>USERNAME</span><br />
                         <input
 
                             type="text"
@@ -60,7 +60,7 @@ function Login() {
                     </label>
                     <br />
                     <label  htmlFor="password">
-                        Password<br />
+                        <span style={{fontSize:'14px'}}>PASSWORD</span><br />
                         <input
 
                             type="password"

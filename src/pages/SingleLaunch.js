@@ -35,79 +35,77 @@ export default function SingleLaunch() {
         <>
             <section id="launches" className="outer-content-container">
                 <div className="inner-content-container">
+                    <div className="cardmoon article">
+                        <article className="singleLaunch" style={{padding:'20px'}}>
+                            <div style={{ display: 'flex',  alignSelf: 'flex-start' }}>
+                                <Link to="/launches" style={{ color: '#fefefe', textDecoration: 'none' }}>
+                                    <p>{'<- Go back'}</p>
+                                </Link>
+                            </div>
 
-                <article className="singleLaunch">
-                    {singleLaunch && singleLaunch.links && singleLaunch.links.patch && singleLaunch.links.patch.large ? (
-                        <img
-                            src={singleLaunch.links.patch.large}
-                            alt={singleLaunch.name}
-                            width="20%"
-                            margin="0 0 auto"
-                        />
-                    ) : (
-                        <img
-                            src="https://images2.imgbox.com/40/e3/GypSkayF_o.png"
-                            alt=""
-                        />
-                    )}
-                    <h1 >{singleLaunch && singleLaunch.name}</h1>
-                    <h2>
-                        Launch Date:{" "}
-                        {singleLaunch && singleLaunch.success ? (
-                            <span>Successful</span>
-                        ) : (
-                            <span >Failed</span>
-                        )}
-                    </h2>
+                            {singleLaunch && singleLaunch.links && singleLaunch.links.patch && singleLaunch.links.patch.large ? (
+                                <img
+                                    src={singleLaunch.links.patch.large}
+                                    alt={singleLaunch.name}
+                                    width="20%"
+                                    margin="0 0 auto"
+                                />
+                            ) : (
+                                <img
+                                    src="https://images2.imgbox.com/40/e3/GypSkayF_o.png"
+                                    alt=""
+                                />
+                            )}
 
-                    <p>
-                        {singleLaunch && singleLaunch.details}
-                    </p>
+                            <h1 style={{ color: '#fefefe', fontSize: '70px' }}>{singleLaunch && singleLaunch.name}</h1>
+                            <h2 style={{ color: '#fefefe'}}>
+                                Launch Date:{" "}
+                                {singleLaunch && singleLaunch.success ? (
+                                    <span style={{ padding:'10px', backgroundColor:'#27a503', color: '#fefefe' }}>Successful</span>
+                                ) : (
+                                    <span style={{ padding:'10px', backgroundColor:'#FF6901', color: '#fefefe' }}>Failed</span>
+                                )}
+                            </h2>
 
+                            <p>
+                                {singleLaunch && singleLaunch.details}
+                            </p>
 
-
-                    <ul className="singleLaunchDetails">
-                        <li>
-
-                            <a
-                                href={singleLaunch && singleLaunch.links.article}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="button button2"
-                            >
-                                Read Article
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href={singleLaunch && singleLaunch.links.presskit}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="button button3"
-                            >
-                                Presskit
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href={singleLaunch && singleLaunch.links.webcast}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="button button1"
-                            >
-                                Watch Launch on YouTube
-                            </a>
-                        </li>
-                        <li>
-                            <Link
-                                to="/launches"
-
-                            >
-                                &larr; Back
-                            </Link>
-                        </li>
-                    </ul>
-                </article>
+                            <ul className="singleLaunchDetails">
+                                <li>
+                                    {singleLaunch && singleLaunch.links && singleLaunch.links.article && (
+                                        <button
+                                            onClick={() => window.open(singleLaunch.links.article, '_blank')}
+                                            className="button button3"
+                                            style={{ marginRight: '10px' }}
+                                        >
+                                            Read Article
+                                        </button>
+                                    )}
+                                </li>
+                                <li>
+                                    {singleLaunch && singleLaunch.links && singleLaunch.links.presskit && (
+                                        <button
+                                            onClick={() => window.open(singleLaunch.links.presskit, '_blank')}
+                                            className="button button3"
+                                        >
+                                            Presskit
+                                        </button>
+                                    )}
+                                </li>
+                                <li>
+                                    {singleLaunch && singleLaunch.links && singleLaunch.links.webcast && (
+                                        <button
+                                            onClick={() => window.open(singleLaunch.links.webcast, '_blank')}
+                                            className="button button1"
+                                        >
+                                            Watch Launch on YouTube
+                                        </button>
+                                    )}
+                                </li>
+                            </ul>
+                        </article>
+                    </div>
                 </div>
             </section>
 

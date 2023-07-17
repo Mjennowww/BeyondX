@@ -10,6 +10,8 @@ import Launches from "./pages/Launches";
 import SingleLaunch from "./pages/SingleLaunch";
 import Rockets from "./pages/Rockets";
 import Moon from "./pages/Moon.js";
+import Mars from "./pages/Mars.js"
+import Titan from "./pages/Titan.js"
 
 
 
@@ -21,6 +23,8 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/moon" element={<Moon />} />
+                <Route path="/mars" element={<Mars />} />
+                <Route path="/titan" element={<Titan />} />
                 <Route path="/capsules" element={<Capsules />} />
                 <Route path="/launches" element={<Launches />} />
                 <Route path="/launches/:id" element={<SingleLaunch/>} />

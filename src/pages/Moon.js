@@ -1,124 +1,83 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import LoginLogoutButton from "../components/LoginLogoutButton";
-import {Link, useNavigate} from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import {useContext} from "react";
-import moon from "../assets/image-moon.png"
+import moon from "../assets/image-moon.png";
+import { Link } from 'react-router-dom';
 
 function Moon() {
-    const [nextLaunch, setNextLaunch] = useState(null);
-    const [countdown, setCountdown] = useState(null);
-    const navigate = useNavigate();
-    const { isAuth } = useContext(AuthContext);
+    const [moonData, setMoonData] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
+    const [isFahrenheit, setIsFahrenheit] = useState(false);
 
     useEffect(() => {
-        async function fetchNextLaunch() {
+        const fetchMoonData = async () => {
+            setLoading(true);
+            setError(false);
+
             try {
-                const response = await axios.get('https://api.spacexdata.com/v4/launches/next');
-                console.log(response.data);
-                setNextLaunch(response.data);
-
-                // Bereken de resterende tijd tot de volgende lancering
-                if (response.data && response.data.date_local) {
-                    const launchTime = new Date(response.data.date_local);
-                    const currentTime = new Date();
-                    const timeDifference =  currentTime.getTime() - launchTime.getTime();
-                    setCountdown(Math.floor(timeDifference / 1000)); // Zet de tijd om naar seconden
-                }
-            } catch (e) {
-                console.error(e);
+                const response = await fetch('https://api.le-systeme-solaire.net/rest/bodies/moon');
+                const data = await response.json();
+                setMoonData(data);
+            } catch (error) {
+                console.error('Error fetching moon data:', error);
+                setError(true);
             }
-        }
 
-        fetchNextLaunch();
+            setLoading(false);
+        };
+
+        fetchMoonData();
     }, []);
 
-    useEffect(() => {
-        // Start de timer als countdown beschikbaar is
-        if (countdown !== null) {
-            const intervalId = setInterval(() => {
-                setCountdown(prevCountdown => prevCountdown - 1);
-            }, 1000);
-
-
-
-            // Opruimen van de timer wanneer de component wordt geunmount
-            return () => {
-                clearInterval(intervalId);
-            };
-        }
-    }, [countdown]);
-
-    const formatNextLaunchTime = () => {
-        if (nextLaunch && nextLaunch.date_local) {
-            const launchTime = new Date(nextLaunch.date_local);
-            return launchTime.toLocaleString('nl-NL', {
-                timeZone: 'Europe/Amsterdam',
-            });
-        }
-        return '';
+    const toggleTemperatureUnit = () => {
+        setIsFahrenheit(prevState => !prevState);
     };
 
-    const formatCountdown = () => {
-        if (countdown !== null && countdown >= 0) {
-            const days = Math.floor(countdown / (24 * 60 * 60));
-            const hours = Math.floor((countdown % (24 * 60 * 60)) / (60 * 60));
-            const minutes = Math.floor((countdown % (60 * 60)) / 60);
-            const seconds = Math.floor(countdown % 60);
+    const convertToFahrenheit = celsius => {
+        return (celsius * 9) / 5 + 32;
+    };
 
-
-            return (
-                <span>
-    <span style={{ fontWeight: '700', fontSize: '26px', textTransform: 'uppercase' }}>{days}</span> <span style={{ textTransform: 'uppercase' }}>days</span>,{' '}
-                    <span style={{ fontWeight: '700', fontSize: '26px', textTransform: 'uppercase' }}>{hours}</span> <span style={{ textTransform: 'uppercase' }}>hours</span>,{' '}
-                    <span style={{ fontWeight: '700', fontSize: '26px', textTransform: 'uppercase' }}>{minutes}</span> <span style={{ textTransform: 'uppercase' }}>minutes</span>,{' '}
-                    <span style={{ fontWeight: '700', fontSize: '26px', textTransform: 'uppercase' }}>{seconds}</span> <span style={{ textTransform: 'uppercase' }}>seconds</span>
-  </span>
-
-
-
-
-        );
-        }
-        return '';
+    const formatOrbitalPeriod = value => {
+        return value.toString().replace('.', ',');
     };
 
     return (
         <>
-            <section id="stars" className="outer-content-container">
+            <section id="planetmoon" className="outer-content-container">
+                <div className="inner-content-container">
+                    <div className="planets-article-container">
+                        <Link to="/" style={{color:'#fefefe',textDecoration:'none'}}>
+                        <p>{'<- Go back'}</p>
+                        </Link>
+                        <img src={moon} alt="logo" />
 
-                        <div className="inner-content-container">
-
-                            <article className="headquarters">
-                                <span style={{ textTransform:'uppercase' }}>Next Launch:</span>&nbsp;&nbsp;
-                                <div>{formatCountdown()}</div>
-                            </article>
-
-
-                            <div className="home-article-container">
-
-                                <div className="card subreddit-article">
-                                    <div className="card-header">
-                                        <img className="profile-img" src={moon} alt="logo"  />
-                                    </div>
-
-                                    <p className="cardtitle" style={{ color: '#fefefe', fontSize: '60px', textTransform:'uppercase' }}>Moon</p>
-                                    <p style={{ color: '#fefefe' }}>Details ->
-                                    </p>
-
-                                </div>
+                        <div style={{paddingLeft:'40px'}}>
+                            <h2 className="cardtitle" style={{ color: '#fefefe', fontSize: '60px', textTransform: 'uppercase' }}>Moon</h2>
+                            {loading && <p>Loading...</p>}
+                            {error && <p>Error fetching moon data...</p>}
+                            {moonData && (
+                                <>
+                                    <p style={{ color: '#fefefe', fontSize: '14px'}}>Name: {moonData.name}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Discovered By: {moonData.discoveredBy}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Discovery Date: {moonData.discoveryDate}</p>
+                                    <p style={{ paddingTop:'16px'}}>Gravity: <span style={{ fontWeight:'bold', fontSize:'18px', color: '#f78429' }}>{moonData.gravity} m/s²</span></p>
+                                    <p>Avg temperature at night: <span style={{ fontWeight:'bold', fontSize:'18px', color: '#f78429' }}>{isFahrenheit ? convertToFahrenheit(-183) : -183}°{isFahrenheit ? 'F' : 'C'}</span></p>
+                                    <p>Avg temperature at day: <span style={{ fontWeight:'bold', fontSize:'18px', color: '#f78429' }}>{isFahrenheit ? convertToFahrenheit(106) : 106}°{isFahrenheit ? 'F' : 'C'}</span></p>
+                                    <p>Orbital Period: <span style={{ fontWeight:'bold', fontSize:'18px', color: '#f78429' }}>{formatOrbitalPeriod(moonData.sideralOrbit)} days</span></p>
+                                    <p>Equatorial Radius: <span style={{ fontWeight:'bold', fontSize:'18px', color: '#f78429' }}>{moonData.equaRadius} km</span></p>
+                                    <p>Polar Radius: <span style={{ fontWeight:'bold', fontSize:'18px', color: '#f78429' }}>{moonData.polarRadius} km</span></p>
+                                    <p>Mass: <span style={{ fontWeight:'bold', fontSize:'18px', color: '#f78429' }}>{moonData.mass.massValue} × 10^{moonData.mass.massExponent} kg</span></p>
+                                    <p style={{ paddingBottom:'24px'}}>Density: <span style={{ fontWeight:'bold', fontSize:'18px', color: '#f78429' }}>{moonData.density} g/cm³</span></p>
 
 
 
+                                    <button onClick={toggleTemperatureUnit} className="button button3">
+                                        Switch to {isFahrenheit ? 'Celsius' : 'Fahrenheit'}
+                                    </button>
 
+
+                                </>
+                            )}
                         </div>
-                        </div>
-
-
-
-
-
+                    </div>
+                </div>
             </section>
         </>
     );

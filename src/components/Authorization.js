@@ -8,19 +8,22 @@ function Authorization({onSubmitValue, header, children, underlineTextPart1, und
         <div >
             <section id="home" className="outer-content-container">
                 <div className="inner-content-container">
+                    <div className="logincontainer">
                     <div className="login">
-            <h3 >{header}</h3>
-            <form onSubmit={onSubmitValue}>
+            <h3 style={{textTransform:'uppercase', textAlign:'center'}}>{header}</h3>
+                        <p style={{textTransform:'uppercase',fontWeight:'700', fontSize:'18px', paddingBottom:'24px'}} >{underlineTextPart1} <Link to={underlineLink} style={{color: 'orange', textDecoration: 'underline'}}>{underlineLinkText}</Link> {underlineTextPart2}</p>
+
+                        <form onSubmit={onSubmitValue}>
                 {children}
-                <p >{underlineTextPart1} <Link to={underlineLink} style={{color: 'white', textDecoration: 'underline'}}>{underlineLinkText}</Link> {underlineTextPart2}</p>
                 <Button
                     text={buttonText}
                     type="submit"
-                    className="button button1"
+                    className="buttonlogin button1"
                 />
                 <div >{error}{loading}</div>
             </form>
                     </div>
+                </div>
                 </div>
             </section>
         </div>
