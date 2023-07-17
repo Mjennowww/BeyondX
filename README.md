@@ -25,7 +25,7 @@ Before proceeding with the installation, make sure you have the following prereq
 
 - Node.js and npm installed on your machine.
 
-###Instalation
+### Instalation
 
 1. Clone the repository:
 
@@ -34,9 +34,9 @@ Before proceeding with the installation, make sure you have the following prereq
 <br>
 2. Install NPM packages
 
-###`npm install`
+### `npm install`
 
-###Usage
+### Usage
 
 Start \
 Runs the app in the development mode. Open http://localhost:3000 to view it in the browser.
