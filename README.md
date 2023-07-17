@@ -20,7 +20,7 @@ Users can explore different planets, such as the Moon, Mars, and Titan, to learn
 
 To get a local copy of the Beyond application up and running, follow the steps below.
 
-###Prerequisites
+### Prerequisites
 Before proceeding with the installation, make sure you have the following prerequisites:
 
 - Node.js and npm installed on your machine.
@@ -29,7 +29,7 @@ Before proceeding with the installation, make sure you have the following prereq
 
 1. Clone the repository:
 
-###`git clone https://github.com/Mjennow/BeyondX`
+### `git clone https://github.com/Mjennow/BeyondX`
 
 <br>
 2. Install NPM packages
